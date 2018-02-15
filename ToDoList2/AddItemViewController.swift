@@ -8,9 +8,10 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class AddItemViewController: UIViewController {
 
     @IBOutlet weak var itemTextField: UITextField!
+    var items = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,8 +23,17 @@ class SecondViewController: UIViewController {
     }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
+        let itemsObject = UserDefaults.standard.object(forKey: "items")
         
+        if let tempItems = itemsObject as? [String] {
+            items = tempItems
+            items.append(itemTextField.text!)
+        } else {
+            items = [itemTextField.text!]
+        }
         
+        UserDefaults.standard.set(items, forKey: "items")
+        itemTextField.text = ""
     }
     
 
