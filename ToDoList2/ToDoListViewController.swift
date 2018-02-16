@@ -24,7 +24,7 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+       // super.viewDidAppear(animated)
         
         let itemsObject = UserDefaults.standard.object(forKey: "items")
         
@@ -49,6 +49,14 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
 
-  
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            items.remove(at: indexPath.row)
+            listTableView.reloadData()
+            UserDefaults.standard.set(items, forKey: "items")
+            //listTableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
+    }
 
 }

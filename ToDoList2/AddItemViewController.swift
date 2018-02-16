@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddItemViewController: UIViewController {
+class AddItemViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var itemTextField: UITextField!
     var items = [String]()
@@ -36,6 +36,13 @@ class AddItemViewController: UIViewController {
         itemTextField.text = ""
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
